@@ -1,0 +1,20 @@
+FROM {{ docker_hub_username }}/ubuntu-java8:{{ image_tag }}
+
+# MySQL (Metadata store)
+RUN apt-get install -y mysql-server
+
+RUN /etc/init.d/mysql start \
+      && mysql -u root -e "GRANT ALL ON druid.* TO 'druid'@'%' IDENTIFIED BY 'diurd'; CREATE database druid CHARACTER SET utf8;" \
+      && /etc/init.d/mysql stop
+
+RUN echo "[supervisord]\n\
+nodaemon=true\n\
+loglevel=debug\n\
+[program:mysql]\n\
+user=mysql\n\
+command=/usr/bin/pidproxy /var/run/mysqld/mysqld.pid /usr/bin/mysqld_safe\n\
+priority=1" > /etc/supervisor/conf.d/supervisord.conf
+
+ENTRYPOINT export HOSTIP="$(resolveip -s $HOSTNAME)" && exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+
+EXPOSE 3306
