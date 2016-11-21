@@ -21,14 +21,5 @@
   "overlord_node_aliases": ["overlord"],
 
   "middle_manager_node_port": 8085,
-  "middle_manager_node_aliases": ["middlemanager"],
-
-  "zookeeper_node_port": 2181,
-  "zookeeper_node_alias": "zookeeper",
-
-  "mysql_node_port": 3306,
-
-  "kafka_node_port": 9092,
-  "kafka_zookeeper_port": 2181,
-  "kafka_node_alias": "kafka"
+  "middle_manager_node_aliases": ["middlemanager"]
 }

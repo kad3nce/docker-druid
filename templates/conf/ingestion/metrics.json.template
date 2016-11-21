@@ -36,7 +36,7 @@
       "firehose": {
         "type": "kafka-0.8",
         "consumerProps": {
-          "zookeeper.connect": "{{ kafka_node_alias }}:2181",
+          "zookeeper.connect": "kafka:2181",
           "zookeeper.connection.timeout.ms" : "15000",
           "zookeeper.session.timeout.ms" : "15000",
           "zookeeper.sync.time.ms" : "5000",
