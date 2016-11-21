@@ -4,7 +4,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{ISO8601} %p [%t] %c - %m%n"/>
         </Console>
-        <File name="File" fileName="{{ log_path }}/${sys:logfilename}.log">
+        <File name="File" fileName="/var/logs/druid/${sys:logfilename}.log">
             <PatternLayout>
                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
            </PatternLayout>
