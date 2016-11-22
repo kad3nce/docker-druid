@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader
 import os
 import argparse
 import stat
+import errno
 
 TEMPLATE_DIR = "./templates/"
 GENERATED_DIR = "./generated/"
@@ -40,7 +41,13 @@ def prebuild():
 
     scripts = ['build-all.sh', 'build-conf.sh', 'deploy.sh', 'provision.sh']
     for script in scripts:
-        os.symlink(GENERATED_DIR + 'scripts/' + script, script)
+        try:
+            os.symlink(GENERATED_DIR + 'scripts/' + script, script)
+        except OSError, e:
+            if e.errno == errno.EEXIST:
+                os.remove(script)
+                os.symlink(GENERATED_DIR + 'scripts/' + script, script)
+
         st = os.stat(script)
         os.chmod(script, st.st_mode | stat.S_IEXEC)
 

@@ -4,7 +4,7 @@ RUN mkdir -p /usr/local/dependencies
 WORKDIR /usr/local/dependencies
 RUN wget http://www-eu.apache.org/dist/zookeeper/stable/zookeeper-3.4.9.tar.gz \
       && tar -xf /usr/local/dependencies/zookeeper-3.4.9.tar.gz \
-      && mv /usr/local/dependencies/zookeeper-3.4.9 /usr/local/dependencies/zookeeper
+      && mv /usr/local/dependencies/zookeeper-3.4.9 /usr/local/dependencies/zookeeper \
       && cp /usr/local/dependencies/zookeeper/conf/zoo_sample.cfg /usr/local/dependencies/zookeeper/conf/zoo.cfg
 
 RUN echo "[supervisord]\n\

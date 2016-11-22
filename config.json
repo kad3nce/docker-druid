@@ -1,5 +1,5 @@
 {
-  "docker_hub_username": "xiaoyao",
+  "docker_hub_username": "xiaoyao1991",
   "image_tag": "latest",
   "overlay_net": "d-my-net",
   "common_conf_dir": "/usr/local/conf",

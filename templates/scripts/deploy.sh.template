@@ -9,10 +9,10 @@ do
   docker run -itd --name=node-$i-conf --network={{ overlay_net }} --env="constraint:node==d-node-$i" {{ docker_hub_username }}/druid-conf:{{ image_tag }}
 done
 
-docker run -itd -v --volumes-from=node-1-conf --name=kafka --network={{ overlay_net }} --env="constraint:node==d-node-1" {{ docker_hub_username }}/druid-kafka:{{ image_tag }}
-docker run -itd -v  --volumes-from=node-1-conf -p {{ coordinator_node_port }}:{{ coordinator_node_port }} --name=coordinator --network={{ overlay_net }} --env="constraint:node==d-node-1" {{ docker_hub_username }}/druid-coordinator:{{ image_tag }}
-docker run -itd -v  --volumes-from=node-1-conf -p {{ overlord_node_port }}:{{ overlord_node_port }} --name=overlord --network={{ overlay_net }} --env="constraint:node==d-node-1" {{ docker_hub_username }}/druid-overlord:{{ image_tag }}
-docker run -itd -v  --volumes-from=node-1-conf --name=middlemanager --network={{ overlay_net }} --env="constraint:node==d-node-1" {{ docker_hub_username }}/druid-middlemanager:{{ image_tag }}
-docker run -itd -v --volumes-from=node-2-conf --name=broker --network={{ overlay_net }} --env="constraint:node==d-node-2" {{ docker_hub_username }}/druid-broker:{{ image_tag }}
+docker run -itd --volumes-from=node-1-conf --name=kafka --network={{ overlay_net }} --env="constraint:node==d-node-1" {{ docker_hub_username }}/druid-kafka:{{ image_tag }}
+docker run -itd --volumes-from=node-1-conf -p {{ coordinator_node_port }}:{{ coordinator_node_port }} --name=coordinator --network={{ overlay_net }} --env="constraint:node==d-node-1" {{ docker_hub_username }}/druid-coordinator:{{ image_tag }}
+docker run -itd --volumes-from=node-1-conf -p {{ overlord_node_port }}:{{ overlord_node_port }} --name=overlord --network={{ overlay_net }} --env="constraint:node==d-node-1" {{ docker_hub_username }}/druid-overlord:{{ image_tag }}
+docker run -itd --volumes-from=node-1-conf --name=middlemanager --network={{ overlay_net }} --env="constraint:node==d-node-1" {{ docker_hub_username }}/druid-middlemanager:{{ image_tag }}
+docker run -itd --volumes-from=node-2-conf --name=broker --network={{ overlay_net }} --env="constraint:node==d-node-2" {{ docker_hub_username }}/druid-broker:{{ image_tag }}
 docker run -itd -v {{ deep_storage_dir }}:{{ deep_storage_dir }} --volumes-from=node-2-conf --name=realtime --network={{ overlay_net }} --env="constraint:node==d-node-2" {{ docker_hub_username }}/druid-realtime:{{ image_tag }}
 docker run -itd -v {{ deep_storage_dir }}:{{ deep_storage_dir }} --volumes-from=node-2-conf --name=historical --network={{ overlay_net }} --env="constraint:node==d-node-2" {{ docker_hub_username }}/druid-historical:{{ image_tag }}

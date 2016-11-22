@@ -26,8 +26,8 @@ WORKDIR /tmp/druid
 # use versions-maven-plugin 2.1 to work around https://jira.codehaus.org/browse/MVERSIONS-285
 RUN mvn -U -B org.codehaus.mojo:versions-maven-plugin:2.1:set -DgenerateBackupPoms=false -DnewVersion=$DRUID_VERSION \
   && mvn -U -B install -DskipTests=true -Dmaven.javadoc.skip=true \
-  && cp distribution/target/druid-$DRUID_VERSION-bin.tar.gz /usr/local/druid
-  && cp distribution/target/mysql-metadata-storage-bin.tar.gz /usr/local/druid
+  && cp distribution/target/druid-$DRUID_VERSION-bin.tar.gz /usr/local/druid \
+  && cp distribution/target/mysql-metadata-storage-$DRUID_VERSION.tar.gz /usr/local/druid
 
 RUN cp -r distribution/target/extensions /usr/local/druid/
 RUN cp -r distribution/target/hadoop-dependencies /usr/local/druid/
@@ -36,7 +36,7 @@ WORKDIR /usr/local/druid
 RUN tar --strip-components=1 -xvf druid-$DRUID_VERSION-bin.tar.gz
 
 # Manage extensions
-RUN tar -xvf mysql-metadata-storage-bin.tar.gz -C extensions/
+RUN tar -xvf mysql-metadata-storage-$DRUID_VERSION.tar.gz -C extensions/
 
 # clean up time
 RUN apt-get purge --auto-remove -y git \
