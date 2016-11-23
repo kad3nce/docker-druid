@@ -20,7 +20,7 @@ RUN echo "[supervisord]\n\
 nodaemon=true\n\
 loglevel=debug\n\
 [program:kafka]\n\
-user=druid\n\
+user=root\n\
 command=/usr/local/dependencies/kafka/run.sh\n\
 priority=1" > /etc/supervisor/conf.d/supervisord.conf
 
