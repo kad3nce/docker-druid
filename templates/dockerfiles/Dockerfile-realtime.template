@@ -12,7 +12,7 @@ command=java\n\
   -Dlogfilename=realtime\n\
   -Duser.timezone=UTC\n\
   -Dfile.encoding=UTF-8\n\
-  -XX:MaxDirectMemorySize=34359738368\n\
+  -XX:MaxDirectMemorySize=4096m\n\
   -Ddruid.realtime.specFile={{ common_conf_dir }}/ingestion/metrics.json\n\
   -classpath '{{ common_conf_dir }}/druid/_common:{{ common_conf_dir }}/druid/realtime:lib/*'\n\
   io.druid.cli.Main server realtime\n\

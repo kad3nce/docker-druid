@@ -9,7 +9,7 @@ loglevel=debug\n\
 user=druid\n\
 command=java\n\
   -Xmx256m\n\
-  -XX:MaxDirectMemorySize=34359738368\n\
+  -XX:MaxDirectMemorySize=4096m\n\
   -Dlogfilename=broker\n\
   -Duser.timezone=UTC\n\
   -Dfile.encoding=UTF-8\n\
